@@ -70,5 +70,13 @@ dependencies {
     implementation("com.google.mlkit:object-detection:17.0.2")
     implementation(libs.androidx.material.icons.extended)
 
-    implementation("com.google.accompanist:accompanist-permissions:0.36.0")
+    implementation(libs.accompanist.permissions)
+
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    //Glide
+    implementation(libs.glide)
+
+    implementation( libs.compose)
+
 }
