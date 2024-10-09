@@ -79,4 +79,6 @@ dependencies {
 
     implementation( libs.compose)
 
+    implementation(libs.coil.compose)
+
 }

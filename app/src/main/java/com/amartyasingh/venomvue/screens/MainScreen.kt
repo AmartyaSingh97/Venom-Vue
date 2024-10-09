@@ -2,6 +2,7 @@ package com.amartyasingh.venomvue.screens
 
 import android.net.Uri
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.amartyasingh.venomvue.viewmodels.MainViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -12,13 +13,10 @@ import com.google.accompanist.permissions.rememberPermissionState
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun MainScreen(
-    mainViewModel: MainViewModel = viewModel(),
+    mainViewModel: MainViewModel,
     onOpenCameraPreview: () -> Unit,
-    onChoosePicture: () -> Unit,
     onCheckResults: () -> Unit,
 ) {
-
-    val viewModel = mainViewModel
 
     val cameraPermissionState: PermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
 
@@ -28,28 +26,25 @@ fun MainScreen(
         onOpenCamera = {
             onOpenCameraPreview()
         },
-        onChoosePicture = onChoosePicture,
         onCheckResults = onCheckResults,
-        image = viewModel.capturedImageUri
+        viewModel = mainViewModel
     )
 }
 
 @Composable
 private fun MainContent(
     onOpenCamera: () -> Unit,
-    onChoosePicture: () -> Unit,
     onCheckResults: () -> Unit,
     hasPermission: Boolean,
     onRequestPermission: () -> Unit,
-    image: Uri
+    viewModel: MainViewModel
 ) {
 
     if (hasPermission) {
         HomeScreen(
-            image = image,
             onOpenCamera = onOpenCamera,
-            onChoosePicture = onChoosePicture,
-            onCheckResults = onCheckResults
+            onCheckResults = onCheckResults,
+            viewModel = viewModel
         )
     } else {
         NoPermissionScreen(onRequestPermission)

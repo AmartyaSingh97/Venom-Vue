@@ -32,9 +32,6 @@ class MainActivity : ComponentActivity() {
                 ) {
                     MainScreen(
                         mainViewModel = mainViewModel,
-                        onChoosePicture = {
-
-                        },
                         onOpenCameraPreview = {
                              onOpenCameraPreview()
                         },
@@ -79,7 +76,6 @@ class MainActivity : ComponentActivity() {
                 ) {
                     MainScreen(
                         mainViewModel = mainViewModel,
-                        onChoosePicture = {},
                         onOpenCameraPreview = { onOpenCameraPreview() },
                         onCheckResults = {}
                     )
