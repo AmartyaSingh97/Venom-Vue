@@ -1,9 +1,6 @@
-package com.amartyasingh.venomvue.screens
+package com.amartyasingh.venomvue.ui.screens
 
-import android.net.Uri
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.amartyasingh.venomvue.viewmodels.MainViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState

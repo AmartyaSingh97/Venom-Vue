@@ -1,4 +1,4 @@
-package com.amartyasingh.venomvue.screens
+package com.amartyasingh.venomvue.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

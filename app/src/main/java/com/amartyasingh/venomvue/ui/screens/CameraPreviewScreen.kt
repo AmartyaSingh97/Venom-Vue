@@ -1,4 +1,4 @@
-package com.amartyasingh.venomvue.screens
+package com.amartyasingh.venomvue.ui.screens
 
 import android.content.ContentValues
 import android.content.Context

@@ -10,8 +10,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.amartyasingh.venomvue.screens.CameraPreviewScreen
-import com.amartyasingh.venomvue.screens.MainScreen
+import com.amartyasingh.venomvue.ui.screens.CameraPreviewScreen
+import com.amartyasingh.venomvue.ui.screens.MainScreen
 import com.amartyasingh.venomvue.ui.theme.VenomVueTheme
 import com.amartyasingh.venomvue.viewmodels.MainViewModel
 import com.amartyasingh.venomvue.viewmodels.SplashViewmodel
