@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Camera
+import androidx.compose.material.icons.filled.LocalSee
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -51,7 +52,7 @@ fun NoPermissionContent(
             )
             Spacer(modifier = Modifier.size(10.dp))
             Button(onClick = onRequestPermission) {
-                Icon(imageVector = Icons.Default.Camera, contentDescription = "Camera")
+                Icon(imageVector = Icons.Filled.LocalSee, contentDescription = "Camera")
                 Text(text = "Grant permission",
                     modifier = Modifier.padding(8.dp),
                     fontFamily = FontFamily.SansSerif

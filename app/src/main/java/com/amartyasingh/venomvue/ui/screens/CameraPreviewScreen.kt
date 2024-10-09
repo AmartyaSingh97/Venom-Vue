@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -62,7 +63,7 @@ fun CameraPreviewScreen(
         Button(modifier = Modifier.padding(bottom = 48.dp).height(48.dp), onClick = { captureImage(imageCapture, context,onImageCaptured) },
             colors = ButtonDefaults.buttonColors(Color(0xFF3D84FF))) {
             Text(text = "Capture Image",
-                style = TextStyle(color = Color.White,
+                style = TextStyle(color = MaterialTheme.colorScheme.background,
                     fontFamily = FontFamily.Monospace,
                     fontSize = 20.sp))
         }

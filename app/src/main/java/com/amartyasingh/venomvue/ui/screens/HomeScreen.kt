@@ -14,11 +14,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Camera
 import androidx.compose.material.icons.filled.Image
+import androidx.compose.material.icons.filled.LocalSee
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -38,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.amartyasingh.venomvue.R
+import com.amartyasingh.venomvue.ui.theme.VenomVueTheme
 import com.amartyasingh.venomvue.viewmodels.MainViewModel
 
 @Composable
@@ -60,9 +63,9 @@ fun HomeScreen(
         }
     )
 
-    Box(modifier = Modifier.fillMaxSize().background(Color.White)){
+    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(32.dp).background(Color.White),
+            modifier = Modifier.fillMaxSize().padding(32.dp).background(MaterialTheme.colorScheme.background),
             horizontalAlignment = Alignment.CenterHorizontally
         )
         {
@@ -82,14 +85,14 @@ fun HomeScreen(
             Button(
                 onClick = { onOpenCamera() },
                 modifier = Modifier.padding(top = 48.dp).width(400.dp).width(64.dp),
-                colors = ButtonDefaults.buttonColors(Color(0xFF3D84FF))
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary)
                 ){
-                Icon(imageVector = Icons.Default.Camera, contentDescription = "Camera",
-                        tint = Color.White
+                Icon(imageVector = Icons.Default.LocalSee, contentDescription = "Camera",
+                        tint = MaterialTheme.colorScheme.background
                     )
-                Text(text = "Open Camera",
+                Text(text = "Click Picture",
                       style = TextStyle(
-                            color = Color.White,
+                            color = MaterialTheme.colorScheme.background,
                             fontSize = 20.sp,
                             fontFamily = FontFamily.Monospace,
                       ),
@@ -102,14 +105,14 @@ fun HomeScreen(
                     galleryLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
                 },
                 modifier = Modifier.padding(top = 32.dp).width(400.dp).width(64.dp),
-                colors = ButtonDefaults.buttonColors(Color(0xFF3D84FF))
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary)
             ){
                 Icon(imageVector = Icons.Default.Image, contentDescription = "Camera",
-                    tint = Color.White
+                    tint = MaterialTheme.colorScheme.background
                 )
                 Text(text = "Choose Picture",
                     style = TextStyle(
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.background,
                         fontSize = 20.sp,
                         fontFamily = FontFamily.Monospace,
                     ),
@@ -120,11 +123,14 @@ fun HomeScreen(
             Button(
                 onClick = { onCheckResults() },
                 modifier = Modifier.padding(top = 32.dp).width(400.dp).width(64.dp),
-                colors = ButtonDefaults.buttonColors(Color(0xFF3D84FF))
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary)
             ){
+                Icon(imageVector = Icons.Default.Camera, contentDescription = "Camera",
+                    tint = MaterialTheme.colorScheme.background
+                )
                 Text(text = "Check Results",
                     style = TextStyle(
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.background,
                         fontSize = 20.sp,
                         fontFamily = FontFamily.Monospace,
                     ),
