@@ -8,6 +8,10 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.amartyasingh.venomvue.ui.screens.CameraPreviewScreen
@@ -25,19 +29,21 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         installSplashScreen()
         setContent {
-            VenomVueTheme {
+            var darkTheme by remember { mutableStateOf(false) }
+
+            VenomVueTheme(darkTheme = darkTheme) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     MainScreen(
+                        darkTheme = darkTheme,
                         mainViewModel = mainViewModel,
                         onOpenCameraPreview = {
-                             onOpenCameraPreview()
+                             onOpenCameraPreview(darkTheme)
                         },
-                        onCheckResults = {
-
-                        },
+                        onCheckResults = {},
+                        onThemeUpdated = { darkTheme = !darkTheme }
                     )
                 }
             }
@@ -50,7 +56,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun onOpenCameraPreview() {
+    private fun onOpenCameraPreview(darkTheme: Boolean) {
          setContent {
              VenomVueTheme {
                  Surface (
@@ -60,14 +66,14 @@ class MainActivity : ComponentActivity() {
                      CameraPreviewScreen(onImageCaptured = { image ->
                             // Do something with the image
                             mainViewModel.updateCapturedImageUri(image)
-                            onReturnToMainScreen()
+                            onReturnToMainScreen(darkTheme)
                      })
                  }
              }
          }
     }
 
-    private fun onReturnToMainScreen() {
+    private fun onReturnToMainScreen(darkTheme: Boolean) {
         setContent {
             VenomVueTheme {
                 Surface(
@@ -76,8 +82,10 @@ class MainActivity : ComponentActivity() {
                 ) {
                     MainScreen(
                         mainViewModel = mainViewModel,
-                        onOpenCameraPreview = { onOpenCameraPreview() },
-                        onCheckResults = {}
+                        onOpenCameraPreview = { onOpenCameraPreview(darkTheme) },
+                        onCheckResults = {},
+                        onThemeUpdated = { },
+                        darkTheme = darkTheme
                     )
                 }
             }

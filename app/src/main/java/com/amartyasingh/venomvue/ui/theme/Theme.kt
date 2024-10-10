@@ -1,6 +1,5 @@
 package com.amartyasingh.venomvue.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -13,19 +12,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
+    primary = primaryColor,
     secondary = PurpleGrey80,
     tertiary = Pink80,
     onPrimary = primaryColor,
-    background = Color.Black
+    background = Color.Black,
+    onSecondary = Color.Black,
+    secondaryContainer = Color(0xFFB3CDE3)
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
+    primary = primaryColor,
     secondary = PurpleGrey40,
     tertiary = Pink40,
     onPrimary = primaryColor,
-    background = Color.White
+    background = Color.White,
+    onSecondary = Color.White,
+    secondaryContainer = Color(0xFFB3CDE3)
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

@@ -10,9 +10,11 @@ import com.google.accompanist.permissions.rememberPermissionState
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun MainScreen(
+    darkTheme: Boolean,
     mainViewModel: MainViewModel,
     onOpenCameraPreview: () -> Unit,
     onCheckResults: () -> Unit,
+    onThemeUpdated: () -> Unit
 ) {
 
     val cameraPermissionState: PermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
@@ -24,7 +26,9 @@ fun MainScreen(
             onOpenCameraPreview()
         },
         onCheckResults = onCheckResults,
-        viewModel = mainViewModel
+        viewModel = mainViewModel,
+        darkTheme = darkTheme,
+        onThemeUpdated = onThemeUpdated
     )
 }
 
@@ -34,14 +38,18 @@ private fun MainContent(
     onCheckResults: () -> Unit,
     hasPermission: Boolean,
     onRequestPermission: () -> Unit,
-    viewModel: MainViewModel
+    viewModel: MainViewModel,
+    darkTheme: Boolean,
+    onThemeUpdated: () -> Unit
 ) {
 
     if (hasPermission) {
         HomeScreen(
             onOpenCamera = onOpenCamera,
             onCheckResults = onCheckResults,
-            viewModel = viewModel
+            viewModel = viewModel,
+            darkTheme = darkTheme,
+            onThemeUpdated = onThemeUpdated
         )
     } else {
         NoPermissionScreen(onRequestPermission)
