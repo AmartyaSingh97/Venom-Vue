@@ -15,6 +15,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.amartyasingh.venomvue.ui.screens.CameraPreviewScreen
 import com.amartyasingh.venomvue.ui.screens.MainScreen
 import com.amartyasingh.venomvue.ui.theme.VenomVueTheme
@@ -26,9 +30,11 @@ class MainActivity : ComponentActivity() {
     private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         installSplashScreen()
+
         setContent {
             val temp = isSystemInDarkTheme()
             var darkTheme by remember { mutableStateOf(temp) }
@@ -38,15 +44,30 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen(
-                        darkTheme = darkTheme,
-                        mainViewModel = mainViewModel,
-                        onOpenCameraPreview = {
-                             onOpenCameraPreview(darkTheme)
-                        },
-                        onCheckResults = {},
-                        onThemeUpdated = { darkTheme = !darkTheme }
-                    )
+                    val navController = rememberNavController()
+
+                    NavHost(navController = navController, startDestination = "main_screen"){
+
+                        composable("main_screen"){
+                            MainScreen(
+                                darkTheme = darkTheme,
+                                mainViewModel = mainViewModel,
+                                onOpenCameraPreview = {
+                                    navController.navigate("camera_preview")
+                                },
+                                onCheckResults = {},
+                                onThemeUpdated = { darkTheme = !darkTheme }
+                            )
+                        }
+
+                        composable("camera_preview"){
+                            CameraPreviewScreen(onImageCaptured = { image ->
+                                // Do something with the image
+                                mainViewModel.updateCapturedImageUri(image)
+                                navController.popBackStack()
+                            })
+                        }
+                    }
                 }
             }
         }
@@ -54,42 +75,6 @@ class MainActivity : ComponentActivity() {
         installSplashScreen().apply {
             setKeepOnScreenCondition{
                 viewModel.isSplashShow.value
-            }
-        }
-    }
-
-    private fun onOpenCameraPreview(darkTheme: Boolean) {
-         setContent {
-             VenomVueTheme {
-                 Surface (
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
-                 ){
-                     CameraPreviewScreen(onImageCaptured = { image ->
-                            // Do something with the image
-                            mainViewModel.updateCapturedImageUri(image)
-                            onReturnToMainScreen(darkTheme)
-                     })
-                 }
-             }
-         }
-    }
-
-    private fun onReturnToMainScreen(darkTheme: Boolean) {
-        setContent {
-            VenomVueTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    MainScreen(
-                        mainViewModel = mainViewModel,
-                        onOpenCameraPreview = { onOpenCameraPreview(darkTheme) },
-                        onCheckResults = {},
-                        onThemeUpdated = { },
-                        darkTheme = darkTheme
-                    )
-                }
             }
         }
     }

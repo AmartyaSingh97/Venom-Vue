@@ -60,7 +60,8 @@ fun CameraPreviewScreen(
     }
     Box(contentAlignment = Alignment.BottomCenter, modifier = Modifier.fillMaxSize()) {
         AndroidView({ previewView }, modifier = Modifier.fillMaxSize())
-        Button(modifier = Modifier.padding(bottom = 48.dp).height(48.dp), onClick = { captureImage(imageCapture, context,onImageCaptured) },
+        Button(modifier = Modifier.padding(bottom = 48.dp).height(48.dp),
+            onClick = { captureImage(imageCapture, context,onImageCaptured) },
             colors = ButtonDefaults.buttonColors(Color(0xFF3D84FF))) {
             Text(text = "Capture Image",
                 style = TextStyle(color = MaterialTheme.colorScheme.background,
